@@ -3267,6 +3267,68 @@ spec:
             description: 'Configuration affecting edge load balancer. See more details
               at: https://istio.io/docs/reference/config/networking/gateway.html'
             properties:
+              fallbackTls:
+                properties:
+                  caCertificates:
+                    description: REQUIRED if mode is `MUTUAL` or `OPTIONAL_MUTUAL`.
+                    type: string
+                  cipherSuites:
+                    description: 'Optional: If specified, only support the specified
+                      cipher list.'
+                    items:
+                      type: string
+                    type: array
+                  credentialName:
+                    type: string
+                  httpsRedirect:
+                    type: boolean
+                  maxProtocolVersion:
+                    description: 'Optional: Maximum TLS protocol version.'
+                    enum:
+                    - TLS_AUTO
+                    - TLSV1_0
+                    - TLSV1_1
+                    - TLSV1_2
+                    - TLSV1_3
+                    type: string
+                  minProtocolVersion:
+                    description: 'Optional: Minimum TLS protocol version.'
+                    enum:
+                    - TLS_AUTO
+                    - TLSV1_0
+                    - TLSV1_1
+                    - TLSV1_2
+                    - TLSV1_3
+                    type: string
+                  mode:
+                    enum:
+                    - PASSTHROUGH
+                    - SIMPLE
+                    - MUTUAL
+                    - AUTO_PASSTHROUGH
+                    - ISTIO_MUTUAL
+                    - OPTIONAL_MUTUAL
+                    - FALLBACK_SIMPLE
+                    type: string
+                  privateKey:
+                    description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
+                    type: string
+                  serverCertificate:
+                    description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
+                    type: string
+                  subjectAltNames:
+                    items:
+                      type: string
+                    type: array
+                  verifyCertificateHash:
+                    items:
+                      type: string
+                    type: array
+                  verifyCertificateSpki:
+                    items:
+                      type: string
+                    type: array
+                type: object
               selector:
                 additionalProperties:
                   type: string
@@ -3345,6 +3407,7 @@ spec:
                           - AUTO_PASSTHROUGH
                           - ISTIO_MUTUAL
                           - OPTIONAL_MUTUAL
+                          - FALLBACK_SIMPLE
                           type: string
                         privateKey:
                           description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
@@ -3384,6 +3447,68 @@ spec:
             description: 'Configuration affecting edge load balancer. See more details
               at: https://istio.io/docs/reference/config/networking/gateway.html'
             properties:
+              fallbackTls:
+                properties:
+                  caCertificates:
+                    description: REQUIRED if mode is `MUTUAL` or `OPTIONAL_MUTUAL`.
+                    type: string
+                  cipherSuites:
+                    description: 'Optional: If specified, only support the specified
+                      cipher list.'
+                    items:
+                      type: string
+                    type: array
+                  credentialName:
+                    type: string
+                  httpsRedirect:
+                    type: boolean
+                  maxProtocolVersion:
+                    description: 'Optional: Maximum TLS protocol version.'
+                    enum:
+                    - TLS_AUTO
+                    - TLSV1_0
+                    - TLSV1_1
+                    - TLSV1_2
+                    - TLSV1_3
+                    type: string
+                  minProtocolVersion:
+                    description: 'Optional: Minimum TLS protocol version.'
+                    enum:
+                    - TLS_AUTO
+                    - TLSV1_0
+                    - TLSV1_1
+                    - TLSV1_2
+                    - TLSV1_3
+                    type: string
+                  mode:
+                    enum:
+                    - PASSTHROUGH
+                    - SIMPLE
+                    - MUTUAL
+                    - AUTO_PASSTHROUGH
+                    - ISTIO_MUTUAL
+                    - OPTIONAL_MUTUAL
+                    - FALLBACK_SIMPLE
+                    type: string
+                  privateKey:
+                    description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
+                    type: string
+                  serverCertificate:
+                    description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
+                    type: string
+                  subjectAltNames:
+                    items:
+                      type: string
+                    type: array
+                  verifyCertificateHash:
+                    items:
+                      type: string
+                    type: array
+                  verifyCertificateSpki:
+                    items:
+                      type: string
+                    type: array
+                type: object
               selector:
                 additionalProperties:
                   type: string
@@ -3462,6 +3587,7 @@ spec:
                           - AUTO_PASSTHROUGH
                           - ISTIO_MUTUAL
                           - OPTIONAL_MUTUAL
+                          - FALLBACK_SIMPLE
                           type: string
                         privateKey:
                           description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
@@ -3970,6 +4096,7 @@ spec:
                           - AUTO_PASSTHROUGH
                           - ISTIO_MUTUAL
                           - OPTIONAL_MUTUAL
+                          - FALLBACK_SIMPLE
                           type: string
                         privateKey:
                           description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
@@ -4144,6 +4271,7 @@ spec:
                           - AUTO_PASSTHROUGH
                           - ISTIO_MUTUAL
                           - OPTIONAL_MUTUAL
+                          - FALLBACK_SIMPLE
                           type: string
                         privateKey:
                           description: REQUIRED if mode is `SIMPLE` or `MUTUAL`.
@@ -7019,6 +7147,60 @@ spec:
                           operation:
                             description: Operation specifies the operation of a request.
                             properties:
+                              extensionNotPaths:
+                                items:
+                                  oneOf:
+                                  - not:
+                                      anyOf:
+                                      - required:
+                                        - exact
+                                      - required:
+                                        - prefix
+                                      - required:
+                                        - regex
+                                  - required:
+                                    - exact
+                                  - required:
+                                    - prefix
+                                  - required:
+                                    - regex
+                                  properties:
+                                    exact:
+                                      type: string
+                                    prefix:
+                                      type: string
+                                    regex:
+                                      description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                      type: string
+                                  type: object
+                                type: array
+                              extensionPaths:
+                                items:
+                                  oneOf:
+                                  - not:
+                                      anyOf:
+                                      - required:
+                                        - exact
+                                      - required:
+                                        - prefix
+                                      - required:
+                                        - regex
+                                  - required:
+                                    - exact
+                                  - required:
+                                    - prefix
+                                  - required:
+                                    - regex
+                                  properties:
+                                    exact:
+                                      type: string
+                                    prefix:
+                                      type: string
+                                    regex:
+                                      description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                      type: string
+                                  type: object
+                                type: array
                               hosts:
                                 description: Optional.
                                 items:
@@ -7201,6 +7383,60 @@ spec:
                           operation:
                             description: Operation specifies the operation of a request.
                             properties:
+                              extensionNotPaths:
+                                items:
+                                  oneOf:
+                                  - not:
+                                      anyOf:
+                                      - required:
+                                        - exact
+                                      - required:
+                                        - prefix
+                                      - required:
+                                        - regex
+                                  - required:
+                                    - exact
+                                  - required:
+                                    - prefix
+                                  - required:
+                                    - regex
+                                  properties:
+                                    exact:
+                                      type: string
+                                    prefix:
+                                      type: string
+                                    regex:
+                                      description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                      type: string
+                                  type: object
+                                type: array
+                              extensionPaths:
+                                items:
+                                  oneOf:
+                                  - not:
+                                      anyOf:
+                                      - required:
+                                        - exact
+                                      - required:
+                                        - prefix
+                                      - required:
+                                        - regex
+                                  - required:
+                                    - exact
+                                  - required:
+                                    - prefix
+                                  - required:
+                                    - regex
+                                  properties:
+                                    exact:
+                                      type: string
+                                    prefix:
+                                      type: string
+                                    regex:
+                                      description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                      type: string
+                                  type: object
+                                type: array
                               hosts:
                                 description: Optional.
                                 items:

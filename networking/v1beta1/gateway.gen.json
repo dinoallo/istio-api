@@ -23,6 +23,9 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "fallbackTls": {
+            "$ref": "#/components/schemas/istio.networking.v1beta1.ServerTLSSettings"
           }
         }
       },
@@ -162,7 +165,8 @@
           "MUTUAL",
           "AUTO_PASSTHROUGH",
           "ISTIO_MUTUAL",
-          "OPTIONAL_MUTUAL"
+          "OPTIONAL_MUTUAL",
+          "FALLBACK_SIMPLE"
         ]
       }
     }

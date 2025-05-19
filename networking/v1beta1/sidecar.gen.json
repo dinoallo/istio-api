@@ -212,7 +212,8 @@
           "MUTUAL",
           "AUTO_PASSTHROUGH",
           "ISTIO_MUTUAL",
-          "OPTIONAL_MUTUAL"
+          "OPTIONAL_MUTUAL",
+          "FALLBACK_SIMPLE"
         ]
       },
       "istio.networking.v1beta1.Sidecar": {

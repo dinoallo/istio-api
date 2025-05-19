@@ -359,6 +359,15 @@ If selector is nil, the Gateway will be applied to all workloads.</p>
 Yes
 </td>
 </tr>
+<tr id="Gateway-fallback_tls">
+<td><code>fallbackTls</code></td>
+<td><code><a href="#ServerTLSSettings">ServerTLSSettings</a></code></td>
+<td>
+</td>
+<td>
+No
+</td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -916,6 +925,11 @@ is not required to send a certificate. If a client certificate
 is presented, it will be validated. ca_certificates should
 be specified for validating client certificates.</p>
 
+</td>
+</tr>
+<tr id="ServerTLSSettings-TLSmode-FALLBACK_SIMPLE">
+<td><code>FALLBACK_SIMPLE</code></td>
+<td>
 </td>
 </tr>
 </tbody>

@@ -37422,6 +37422,16 @@
                 "type": "istio.networking.v1alpha3.HTTPRetry"
               },
               {
+                "id": 1001,
+                "name": "cryptomb_config",
+                "type": "CryptombPrivateKeyConfig"
+              },
+              {
+                "id": 1002,
+                "name": "mse_ingress_global_config",
+                "type": "MSEIngressGlobalConfig"
+              },
+              {
                 "id": 63,
                 "name": "mesh_mTLS",
                 "type": "TLSConfig"
@@ -37430,11 +37440,6 @@
                 "id": 64,
                 "name": "tls_defaults",
                 "type": "TLSConfig"
-              },
-              {
-                "id": 1002,
-                "name": "mse_ingress_global_config",
-                "type": "MSEIngressGlobalConfig"
               }
             ],
             "reserved_ids": [
@@ -38186,6 +38191,26 @@
                 ]
               },
               {
+                "name": "CryptombPrivateKeyConfig",
+                "fields": [
+                  {
+                    "id": 1,
+                    "name": "enable_cryptomb",
+                    "type": "bool"
+                  },
+                  {
+                    "id": 2,
+                    "name": "pool_delay",
+                    "type": "google.protobuf.Duration"
+                  },
+                  {
+                    "id": 3,
+                    "name": "enable_qat",
+                    "type": "bool"
+                  }
+                ]
+              },
+              {
                 "name": "TLSConfig",
                 "fields": [
                   {
@@ -38269,6 +38294,39 @@
                 "id": 4,
                 "name": "upstream_idle_timeout",
                 "type": "google.protobuf.Duration"
+              },
+              {
+                "id": 5,
+                "name": "enable_h3",
+                "type": "bool"
+              },
+              {
+                "id": 6,
+                "name": "access_log_filters",
+                "type": "AccessLogFilter",
+                "is_repeated": true
+              },
+              {
+                "id": 7,
+                "name": "enable_proxy_protocol",
+                "type": "bool"
+              }
+            ],
+            "messages": [
+              {
+                "name": "AccessLogFilter",
+                "fields": [
+                  {
+                    "id": 1,
+                    "name": "host",
+                    "type": "string"
+                  },
+                  {
+                    "id": 2,
+                    "name": "sample_rate",
+                    "type": "uint32"
+                  }
+                ]
               }
             ]
           }
@@ -40487,6 +40545,10 @@
               {
                 "name": "OPTIONAL_MUTUAL",
                 "integer": 5
+              },
+              {
+                "name": "FALLBACK_SIMPLE",
+                "integer": 6
               }
             ]
           },
@@ -40530,6 +40592,11 @@
                     "value": "REQUIRED"
                   }
                 ]
+              },
+              {
+                "id": 3,
+                "name": "fallback_tls",
+                "type": "ServerTLSSettings"
               }
             ],
             "maps": [
@@ -43237,6 +43304,10 @@
               {
                 "name": "OPTIONAL_MUTUAL",
                 "integer": 5
+              },
+              {
+                "name": "FALLBACK_SIMPLE",
+                "integer": 6
               }
             ]
           },
@@ -43280,6 +43351,11 @@
                     "value": "REQUIRED"
                   }
                 ]
+              },
+              {
+                "id": 3,
+                "name": "fallback_tls",
+                "type": "ServerTLSSettings"
               }
             ],
             "maps": [
@@ -47483,6 +47559,18 @@
                 "name": "not_paths",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 1000,
+                "name": "extension_paths",
+                "type": "StringMatch",
+                "is_repeated": true
+              },
+              {
+                "id": 1001,
+                "name": "extension_not_paths",
+                "type": "StringMatch",
+                "is_repeated": true
               }
             ]
           },
@@ -47511,6 +47599,26 @@
                 "name": "not_values",
                 "type": "string",
                 "is_repeated": true
+              }
+            ]
+          },
+          {
+            "name": "StringMatch",
+            "fields": [
+              {
+                "id": 1,
+                "name": "exact",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "prefix",
+                "type": "string"
+              },
+              {
+                "id": 3,
+                "name": "regex",
+                "type": "string"
               }
             ]
           }
@@ -47979,6 +48087,18 @@
                 "name": "not_paths",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 1000,
+                "name": "extension_paths",
+                "type": "StringMatch",
+                "is_repeated": true
+              },
+              {
+                "id": 1001,
+                "name": "extension_not_paths",
+                "type": "StringMatch",
+                "is_repeated": true
               }
             ]
           },
@@ -48007,6 +48127,26 @@
                 "name": "not_values",
                 "type": "string",
                 "is_repeated": true
+              }
+            ]
+          },
+          {
+            "name": "StringMatch",
+            "fields": [
+              {
+                "id": 1,
+                "name": "exact",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "prefix",
+                "type": "string"
+              },
+              {
+                "id": 3,
+                "name": "regex",
+                "type": "string"
               }
             ]
           }
